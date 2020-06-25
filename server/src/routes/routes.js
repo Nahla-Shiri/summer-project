@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 const userContorller = require('../controllers/users.controller');
-
+const brandContorller = require('../controllers/brand.controller');
 //Auth and sign Up
 router.post('/register', userContorller.register);
 router.post('/login', userContorller.login);
@@ -24,13 +24,11 @@ router.all('*',(req, res, next)=>{
 
 //---------------Protected Routes-----------------//
 
-router.get(
-    '/brand',
-    (req, res, next)=> {
-        return res.send({ message : 'Hi you are autenticated',
-                          user: req.user
-                    });
-    }
-);
+router.post( '/brand', brandContorller.create);
+router.get( '/brand', brandContorller.get);
+router.delete( '/brand/:brand_id', brandContorller.delete);
+router.put( '/brand/:brand_id', brandContorller.update);
+   
+
 
 module.exports = router;
