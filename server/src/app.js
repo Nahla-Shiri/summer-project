@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require('morgan');
+const routes = require('./routes/routes');
+const passport = require('passport');
 
 const app = express();
 
@@ -22,15 +24,35 @@ mongoose.connection.on("error", (err) => {
 
 
 app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded( ));
 
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
 //--------------Routes----------------//
-app.post('/hello',(req, res)=>{
-    const name = req.body.name;
-    res.send({
-        message : `welcome ${name}`
-    })
-})
+
+app.use('/api/bo', routes);
+
+
+//-----------------ERRORS------------//
+
+app.use((req, res, next) => {
+  //404 Not Found
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const error = err.message || 'Error processing your request';
+
+  res.status(status).send({
+    error,
+  });
+});
 
 module.exports = app;
