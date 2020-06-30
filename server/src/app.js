@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const logger = require('morgan');
 const routes = require('./routes/routes');
 const passport = require('passport');
+const cors = require('cors');
 
 const app = express();
 
@@ -22,6 +23,7 @@ mongoose.connection.on("error", (err) => {
 
 //---------------Middelware ----------------//
 
+app.use(cors());
 
 app.use(logger('dev'));
 
