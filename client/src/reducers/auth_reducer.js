@@ -1,4 +1,9 @@
-import { AUTH_ATTEMPTING, AUTH_SUCCESS, AUTH_FAILED } from "../actions/type";
+import {
+  AUTH_ATTEMPTING,
+  AUTH_SUCCESS,
+  AUTH_FAILED,
+  USER_LOGGED_OUT,
+} from "../actions/type";
 const initialState = {
   attempting: false,
   isAuth: false,
@@ -18,6 +23,13 @@ export default (state = initialState, { type, payload }) => {
         attempting: false,
         isAuth: false,
         error: payload,
+      };
+
+    case USER_LOGGED_OUT:
+      return {
+        ...state,
+        isAuth: false,
+        profile: {},
       };
     default:
       return state;

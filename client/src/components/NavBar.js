@@ -7,12 +7,48 @@ import {
   Nav,
   NavItem,
   NavLink,
+  ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
 
-const NavBar = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+import {useSelector, useDispatch } from "react-redux";
+import {logUserOut} from '../actions/auth_actions';
 
+const NavBar = (props) => {
+  
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setOpen] = useState(false);
+
+  const toggleButton = () => setOpen(!dropdownOpen);
   const toggle = () => setIsOpen(!isOpen);
+
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(logUserOut());
+   
+  };
+  const renderLoginOrLogout = () => {
+    if(auth.isAuth) {
+      return (
+        <ButtonDropdown isOpen={dropdownOpen} toggle={toggleButton}>
+          <DropdownToggle caret color="link" size="sm">
+            Welcome
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem onClick={handleLogOut}>Logout</DropdownItem>
+          </DropdownMenu>
+        </ButtonDropdown>
+      );
+    }
+    return(
+      <NavItem>
+         <NavLink href="/login">Login</NavLink>
+      </NavItem>
+    )
+    
+  }
 
   return (
     <div>
@@ -21,9 +57,7 @@ const NavBar = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/login">Login</NavLink>
-            </NavItem>
+            {renderLoginOrLogout()}
            </Nav>
          </Collapse>
       </Navbar>
