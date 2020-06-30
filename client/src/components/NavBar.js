@@ -34,7 +34,7 @@ const NavBar = (props) => {
       return (
         <ButtonDropdown isOpen={dropdownOpen} toggle={toggleButton}>
           <DropdownToggle caret color="link" size="sm">
-            Welcome
+            Welcome { auth.profile.name }
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem onClick={handleLogOut}>Logout</DropdownItem>

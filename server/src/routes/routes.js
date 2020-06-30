@@ -23,7 +23,7 @@ router.all('*',(req, res, next)=>{
 });
 
 //---------------Protected Routes-----------------//
-
+router.get( '/profile', userContorller.profile);
 router.post( '/brand', brandContorller.create);
 router.get( '/brand', brandContorller.get);
 router.delete( '/brand/:brand_id', brandContorller.delete);

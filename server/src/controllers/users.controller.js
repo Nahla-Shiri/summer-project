@@ -62,10 +62,12 @@ userController.login = async (req,res,next)=> {
         next(e)
     }
 
-    
-
-    //if OK, then create JWT and return it
 
 };
 
+
+userController.profile = (req, res, next) => {
+    const { user } = req;
+    res.send({ user });
+}
 module.exports = userController;

@@ -3,6 +3,7 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   USER_LOGGED_OUT,
+  PROFILE_FETCH,
 } from "../actions/type";
 const initialState = {
   attempting: false,
@@ -24,6 +25,9 @@ export default (state = initialState, { type, payload }) => {
         isAuth: false,
         error: payload,
       };
+
+      case PROFILE_FETCH:
+      return { ...state, profile: payload };
 
     case USER_LOGGED_OUT:
       return {
