@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import AddBrandForm from './AddBrandForm';
 
 const Home = () => {
     return (
         <div>
-            home
+            <AddBrandForm />
         </div>
     )
 }

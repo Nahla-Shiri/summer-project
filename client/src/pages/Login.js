@@ -59,7 +59,8 @@ const Login = () => {
             .required(),
           password: Yup.string().min(6).required(),
         })} // end yup validation
-        render={({
+        >
+        {({
           handleChange,
           handleSubmit,
           handleBlur,
@@ -80,9 +81,7 @@ const Login = () => {
                 onBlur={handleBlur}
               />
 
-              {errors.email && touched.email ? (
-                <FormFeedback>{errors.email}</FormFeedback> // display error message
-              ) : null}
+              {errors.email && touched.email && <FormFeedback>{errors.email}</FormFeedback>}
             </FormGroup>
             <FormGroup>
               <Label>Password</Label>
@@ -94,9 +93,7 @@ const Login = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.password && touched.password ? (
-                <FormFeedback>{errors.password}</FormFeedback>
-              ) : null}
+              {errors.password && touched.password && <FormFeedback>{errors.password}</FormFeedback>}
             </FormGroup>
             <Button
               color="primary"
@@ -108,7 +105,7 @@ const Login = () => {
             </Button>
           </div>
         )}
-      />
+      </Formik>
       <Link to="/signup">Do not have an account? Sign Up Now</Link>
     </div>
   );
