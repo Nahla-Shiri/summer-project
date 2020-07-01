@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {
@@ -8,11 +9,20 @@ import {
     Input,
     FormFeedback,
   } from "reactstrap";
+  
+
+  import { saveBrand } from '../actions/brand_actions';
 
 const AddBrandForm = () => {
 
+  const dispatch = useDispatch();
+  const brand = useSelector(state => state.brand);
+  console.log(brand);
+
     const handleFormSubmit = (values, bag) => {
-       console.log(values);
+      console.log(values);
+      dispatch(saveBrand(values));
+      bag.setSubmitting(false);
       };
     
     

@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import {
   Button,
   FormGroup,
@@ -7,13 +9,11 @@ import {
   FormFeedback,
   Alert,
 } from "reactstrap";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { signIn } from "../actions/auth_actions";
+import { signIn } from "../actions";
 
 const Login = () => {
 
