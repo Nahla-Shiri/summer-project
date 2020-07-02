@@ -12,22 +12,23 @@ import {
   
 
   import { saveBrand } from '../actions/brand_actions';
+  import { ErrorMessage} from '../components';
 
 const AddBrandForm = () => {
 
   const dispatch = useDispatch();
-  const brand = useSelector(state => state.brand);
-  console.log(brand);
-
+  const saved = useSelector(state => state.brand.saved);
+  
+    
     const handleFormSubmit = (values, bag) => {
-      console.log(values);
       dispatch(saveBrand(values));
       bag.setSubmitting(false);
-      };
-    
+    }
+   
     
     return (
         <div>
+          <ErrorMessage />
             <Formik 
             initialValues ={{title: "", description: "" }}
             onSubmit={handleFormSubmit}

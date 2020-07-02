@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
-import {onLoadingSignIn} from './actions/'
+import {onLoadingSignIn} from './actions/auth_actions'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 

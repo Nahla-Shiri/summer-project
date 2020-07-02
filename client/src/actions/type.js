@@ -4,3 +4,9 @@ export const AUTH_FAILED ='AUTH_FAILED';
 export const USER_LOGGED_OUT ='USER_LOGGED_OUT';
 export const PROFILE_FETCH ='PROFILE_FETCH';
 export const BRAND_SAVED = 'BRAND_SAVED';
+export const ADD_ERROR = 'ADD_ERROR';
+export const CLEAR_ERRORS  ='CLEAR_ERRORS';
+
+export const FETCHING_BRAND = 'FETCHING_BRAND';
+export const FETCHED_SUCCESS = 'FETCHED_SUCCESS';
+export const FETCHED_FAILED  ='FETCHED_FAILED';
