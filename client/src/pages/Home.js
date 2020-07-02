@@ -1,5 +1,5 @@
 import React,{useEffect}from 'react';
-import AddBrandForm from './AddBrandForm';
+import AddBrand from './AddBrand';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBrand } from '../actions/brand_actions'
 
@@ -18,7 +18,7 @@ const Home = () => {
 
     return (
         <div>
-            <AddBrandForm />
+            <AddBrand />
             { brand  && fetching ? brand.map((item,key) => (
                 <div key={key}>{item.title} {item.description}</div>
             )) : <span>spinner</span> }
