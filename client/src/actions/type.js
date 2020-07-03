@@ -4,6 +4,7 @@ export const AUTH_FAILED ='AUTH_FAILED';
 export const USER_LOGGED_OUT ='USER_LOGGED_OUT';
 export const PROFILE_FETCH ='PROFILE_FETCH';
 export const BRAND_SAVED = 'BRAND_SAVED';
+export const BRAND_UPDATED = 'BRAND_UPDATED';
 export const ADD_ERROR = 'ADD_ERROR';
 export const CLEAR_ERRORS  ='CLEAR_ERRORS';
 

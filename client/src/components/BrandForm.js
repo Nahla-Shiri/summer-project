@@ -26,6 +26,7 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
             handleSubmit,
             handleBlur,
             isValid, 
+            values,
             isSubmitting, 
             errors, 
             touched, 
@@ -37,6 +38,7 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
                   invalid={errors.title && touched.title} // invalid if touched and has error
                   name="title"
                   type="text"
+                  value= {values.title}
                   placeholder="Brand title"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -49,6 +51,7 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
                   invalid={errors.description && touched.description}
                   name="description"
                   type="textarea"
+                  value= {values.description}
                   placeholder="Your description"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -69,4 +72,4 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
     )
 }
 
-export default BrandForm
+export { BrandForm } 

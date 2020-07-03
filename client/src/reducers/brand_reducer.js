@@ -1,5 +1,6 @@
 import {
   BRAND_SAVED,
+  BRAND_UPDATED,
   FETCHED_FAILED,
   FETCHED_SUCCESS,
   FETCHING_BRAND,
@@ -7,13 +8,17 @@ import {
 
 const initialState = {
   saved: false,
+  updated:false,
   fetching: false,
+  brand: []
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case BRAND_SAVED:
       return { ...state, saved: true };
+      case BRAND_UPDATED:
+        return { ...state, updated: true };  
     case FETCHING_BRAND:
       return { ...state, fetching: true };
     case FETCHED_SUCCESS:

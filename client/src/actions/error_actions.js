@@ -3,7 +3,7 @@ import { ADD_ERROR, CLEAR_ERRORS } from './type';
 export const addErrorMessage = e => {
     const {
         response : {
-         data : {error}
+         data : { error }
         }
     } = e;
 

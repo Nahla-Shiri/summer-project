@@ -1,7 +1,9 @@
-import React,{useEffect}from 'react';
+import React,{useEffect} from 'react';
+import { ListGroup } from 'reactstrap';
+import {BrandItem} from '../components';
 import AddBrand from './AddBrand';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBrand } from '../actions/brand_actions'
+import { fetchBrand , deleteBrand} from '../actions/brand_actions'
 
 
 
@@ -14,15 +16,21 @@ const Home = () => {
     
     const {fetching, brand} = useSelector(state => state.brand);
     
-    console.log(brand);
+    const onDelete = (e) => {
+        const BrandId = e.target.attributes.getNamedItem('data-id').value;
+        dispatch(deleteBrand(BrandId));
+    }
 
     return (
         <div>
             <AddBrand />
-            { brand  && fetching ? brand.map((item,key) => (
-                <div key={key}>{item.title} {item.description}</div>
-            )) : <span>spinner</span> }
-            }
+            <ListGroup>
+            { brand  && fetching ? brand.map(item => (
+            <BrandItem key={item._id} item={item} onDelete={onDelete} />
+            
+            
+                )) : <span>spinner</span> }
+            }</ListGroup>
         </div>
     )
 }
