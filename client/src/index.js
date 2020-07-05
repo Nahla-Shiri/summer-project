@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {onLoadingSignIn} from './actions/auth_actions'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/sass/style.scss';
 
 
 import App from './App';

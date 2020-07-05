@@ -1,0 +1,36 @@
+            // -----------------------------------------------------------------------------
+            // This file contains CSS helper classes.
+            // -----------------------------------------------------------------------------
+            // Text helpers 
+            .uppercase {
+                text-transform: uppercase !important;
+            }
+            
+            .lowercase {
+                text-transform: lowercase;
+            }
+            
+            .underline {
+                text-decoration: underline;
+            }
+            
+            .list-style {
+                list-style: inside;
+            }
+            
+            .left {
+                float: left;
+            }
+            
+            .right {
+                float: right;
+            }
+            
+            // Visibility helpers
+            .hidden {
+                display: none
+            }
+            
+            .invisible {
+                visibility: hidden;
+            }
