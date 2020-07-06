@@ -3,21 +3,26 @@ const bcrypt = require("bcryptjs");
 
 const { Schema } = mongoose;
 
-const UserSchema = Schema({
+const AmbassadorSchema = Schema({
   name: { type: String },
   email: { type: String, required: true, index: true, unique: true },
   password: { type: String, required: true },
-  joined: { type: Date, defaut: new Date() },
-  owner: {
+  photo : { type: String, required: true },
+  street : { type: String, required: true },
+  cp : { type: Number, required: true },
+  city : { type: String, required: true },
+  country : { type: String, required: true },
+
+  brand: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-}
+    ref: 'Brand'
+  }
 });
 
-UserSchema.pre("save", async function (next) {
+AmbassadorSchema.pre("save", async function (next) {
   // Check new account, or password is modified
   if (!this.isModified("password")) {
-    // this == UserSchema
+    // this == AmbassadorSchema
     return next();
   }
   // Encrypt the password
@@ -31,7 +36,7 @@ UserSchema.pre("save", async function (next) {
   }
 });
 
-UserSchema.methods.isPasswordMatch = function(password, hashed, callback) {
+AmbassadorSchema.methods.isPasswordMatch = function(password, hashed, callback) {
     bcrypt.compare(password, hashed, (err, success) => {
       if (err) {
         return callback(err);
@@ -40,12 +45,12 @@ UserSchema.methods.isPasswordMatch = function(password, hashed, callback) {
     });
   };
 
-// display user info without password  
-UserSchema.methods.toJSON = function() {
-  const userObject = this.toObject();
-  delete userObject.password;
-  return userObject;
+// display Ambassador info without password  
+AmbassadorSchema.methods.toJSON = function() {
+  const AmbassadorObject = this.toObject();
+  delete AmbassadorObject.password;
+  return AmbassadorObject;
 }
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+const Ambassador = mongoose.model("Ambassador", AmbassadorSchema);
+module.exports = Ambassador;
