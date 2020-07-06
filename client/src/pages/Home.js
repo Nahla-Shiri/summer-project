@@ -1,9 +1,10 @@
-import React,{useEffect} from 'react';
+import React,{ useEffect } from 'react';
 import { ListGroup } from 'reactstrap';
-import {BrandItem} from '../components';
+import { BrandItem, Slider } from '../components';
 import AddBrand from './AddBrand';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBrand , deleteBrand} from '../actions/brand_actions'
+import { fetchBrand , deleteBrand } from '../actions/brand_actions';
+
 
 
 
@@ -23,14 +24,13 @@ const Home = () => {
 
     return (
         <div>
+            <Slider/>
             <AddBrand />
             <ListGroup>
             { brand  && fetching ? brand.map(item => (
             <BrandItem key={item._id} item={item} onDelete={onDelete} />
-            
-            
-                )) : <span>spinner</span> }
-            }</ListGroup>
+            )) : <span>spinner</span> }
+            </ListGroup>
         </div>
     )
 }

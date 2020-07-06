@@ -8,9 +8,9 @@ function App() {
     <div>
       <NavBar />
       <Switch>
-        <ProtectedRoute path="/" component={Home} exact />
-        <ProtectedRoute path="/edit-brand" component={EditBrand} exact />
+         <ProtectedRoute path="/edit-brand" component={EditBrand} exact />
       </Switch>
+      <Route path="/" component={Home} exact />
       <Route path="/login" component={Login} exact />
       <Route path="/signup" component={Signup} exact />
     </div>

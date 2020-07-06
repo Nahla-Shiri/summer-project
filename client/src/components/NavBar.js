@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -7,62 +7,72 @@ import {
   Nav,
   NavItem,
   NavLink,
-  ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
-} from 'reactstrap';
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
-import {useSelector, useDispatch } from "react-redux";
-import {logUserOut} from '../actions/auth_actions';
+import { useSelector, useDispatch } from "react-redux";
+import { logUserOut } from "../actions/auth_actions";
+import logo from "../assets/img/fastbee-logo.png";
 
 const NavBar = (props) => {
-  
-
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setOpen] = useState(false);
 
   const toggleButton = () => setOpen(!dropdownOpen);
   const toggle = () => setIsOpen(!isOpen);
 
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
     dispatch(logUserOut());
-   
   };
-  const renderLoginOrLogout = () => {
-    if(auth.isAuth) {
+  const renderLogin = () => {
+    if (auth.isAuth) {
       return (
-        <ButtonDropdown isOpen={dropdownOpen} toggle={toggleButton}>
-          <DropdownToggle caret color="link" size="sm">
-            Welcome { auth.profile.name }
-          </DropdownToggle>
+        <>
+        <NavLink href="/">Aide</NavLink>
+        <ButtonDropdown isOpen={dropdownOpen} toggle={toggleButton} >
+          <DropdownToggle color="link" caret>Bienvenue {auth.profile.name}</DropdownToggle>
           <DropdownMenu>
             <DropdownItem onClick={handleLogOut}>Logout</DropdownItem>
           </DropdownMenu>
         </ButtonDropdown>
+        </>
       );
     }
-    return(
-      <NavItem>
-         <NavLink href="/login">Login</NavLink>
-      </NavItem>
-    )
-    
-  }
+    return (
+      <>
+        <NavLink href="/login">Espace embassadrice</NavLink>
+        <NavLink href="/login">Espace marque</NavLink>
+      </>
+    );
+  };
 
   return (
-    <div>
-      <Navbar color="dark" dark expand="md">
-        <NavbarBrand href="/">Fast Bee</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            {renderLoginOrLogout()}
-           </Nav>
-         </Collapse>
-      </Navbar>
-    </div>
+    <Navbar light expand="md">
+      <NavbarBrand href="/">
+        <img src={logo} alt="Fast Bee" />
+      </NavbarBrand>
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className="mr-auto" navbar>
+          <NavItem className="navLeft">
+            <NavLink href="/">Nos marques</NavLink>
+            <NavLink href="/contact">Nos ambassadrcies</NavLink>
+            <NavLink href="/">A propos</NavLink>
+          </NavItem>
+          <NavItem className="navRight">
+            <NavLink href="/contact">Contact</NavLink>
+             {renderLogin()}
+          </NavItem>
+        </Nav>
+      </Collapse>
+    </Navbar>
   );
-}
+};
 
 export { NavBar };
