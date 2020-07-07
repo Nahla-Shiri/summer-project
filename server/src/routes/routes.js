@@ -4,9 +4,13 @@ const passport = require('passport');
 
 const userContorller = require('../controllers/users.controller');
 const brandContorller = require('../controllers/brand.controller');
+const ambassadorContorller = require('../controllers/ambassador.controller');
 //Auth and sign Up
-router.post('/register', userContorller.register);
-router.post('/login', userContorller.login);
+router.post('/ambassador-register', ambassadorContorller.register);
+router.post('/ambassador-login', ambassadorContorller.login);
+router.post( '/brand-register', brandContorller.register);
+router.post( '/brand-login', brandContorller.login);
+
 
 //Customize and Protect the routes
 router.all('*',(req, res, next)=>{
@@ -23,9 +27,11 @@ router.all('*',(req, res, next)=>{
 });
 
 //---------------Protected Routes-----------------//
-router.get( '/profile', userContorller.profile);
-router.post( '/brand', brandContorller.create);
-router.get( '/brand', brandContorller.get);
+router.get( '/ambassador-profile', ambassadorContorller.profile);
+router.get( '/brand-profile', brandContorller.profile);
+
+router.get( '/brands', brandContorller.get);
+router.get( '/ambassadors', ambassadorContorller.get);
 router.delete( '/brand/:brand_id', brandContorller.delete);
 router.put( '/brand/:brand_id', brandContorller.update);
    

@@ -4,13 +4,9 @@ const Brand = require('../models/brand.model');
 const brandController = {}
 
 brandController.get = async (req, res, next) => {
-    const { user } = req;
-    const query = {
-        owner : user._id
-    }
-
+    
     try {
-        const  brand = await Brand.find(query);
+        const  brand = await Brand.find();
         return res.send({
             brand
         })
@@ -22,12 +18,18 @@ brandController.get = async (req, res, next) => {
   Brand.find();
 };
 
-brandController.create =  async (req, res, next )=> {
-    const { title, description } = req.body;
+
+brandController.register =  async (req, res, next )=> {
+    const { name, email, password, tel, summary, description, logo, gallery} = req.body;
     const newBrand = new Brand({
-        title,
+        name,
+        email,
+        password,
+        tel,
+        summary,
         description,
-        owner : req.user
+        logo,
+        gallery
     });
 
     try {
@@ -47,16 +49,10 @@ brandController.create =  async (req, res, next )=> {
 
 brandController.update = async (req, res, next)=> {
     const brand_id = req.params.brand_id; 
-    const { title, description } = req.body;
+    const { name, email, password, tel, summary, description, logo, gallery} = req.body;
     try {
 
-        const check = await Brand.findOne({ _id: brand_id });
-        if (!check.owner.equals(req.user._id)) {
-            const err = new Error('This exepense object does not belong to you!');
-            err.status = 401;
-            throw err;
-        }
-        const updated = await Brand.update( {_id: brand_id}, {title, description} );
+        const updated = await Brand.update( {_id: brand_id}, { name, email, password, tel, summary, description, logo, gallery} );
         res.send({
             success: true,
             brand: updated
@@ -72,13 +68,6 @@ brandController.delete = async (req, res, next)=> {
     const brand_id = req.params.brand_id;
     
     try {
-   
-       const check = await Brand.findOne({ _id: brand_id });
-           if (!check.owner.equals(req.user._id)) {
-               const err = new Error('This exepense object does not belong to you!');
-               err.status = 401;
-               throw err;
-           }
         await Brand.deleteOne({_id: brand_id});
         res.send({
             success:true
@@ -88,6 +77,52 @@ brandController.delete = async (req, res, next)=> {
         next(e);
     }
    };
+
+
+
+
+
+brandController.login = async (req,res,next)=> {
+
+    //brandname, password in request
+    const {email, password } =req.body;
+    try {
+        //Check brandname and password are ok
+        const brand = await Ambassador.findOne({email}); // eq {email: email}
+        if(!brand){
+            const err = new Error(`l'adresse e-mail ${email} n'existe pas`);
+            err.status = 401;
+            next(err);
+        }
+        
+        brand.isPasswordMatch(password, brand.password,(err, matched)=>{
+            if(matched) {
+               const secret = process.env.JWT_SECRET;
+               const expire = process.env.JWT_EXPIRATION;
+               const token = jwt.sign({_id: brand._id}, secret, {expiresIn : expire});
+               return res.send({token});
+            }
+
+            res.status(401).send({
+                
+                error : 'l email ou le mot de passe est incorrect'
+            });
+        })
+
+
+        
+    } catch (e) {
+        next(e)
+    }
+
+
+};
+
+
+brandController.profile = (req, res, next) => {
+    const { brand } = req;
+    res.send({ brand });
+}
 
 
 module.exports = brandController;
