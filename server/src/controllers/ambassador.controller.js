@@ -6,7 +6,7 @@ const ambassadorController = {}
  */
 
 ambassadorController.register = async(req, res, next) => {
-   const {name, email, password, photo, street,cp,city,country } =req.body;
+   const {name, email, password, photo, street,cp,city,country,ambassador } =req.body;
    const newAmbassador = new Ambassador({
     name,
     email,
@@ -16,7 +16,7 @@ ambassadorController.register = async(req, res, next) => {
     cp,
     city,
     country,
-    brand
+    ambassador
    });
 
    try {
@@ -34,6 +34,38 @@ ambassadorController.register = async(req, res, next) => {
        
    }
 };
+
+
+ambassadorController.update = async (req, res, next)=> {
+    const ambassador_id = req.params.ambassador_id; 
+    
+    try {
+
+        const updated = await Ambassador.update( {_id: ambassador_id}, { $set: req.body });
+        res.send({
+            success: true,
+            ambassador: updated
+
+        })
+    } catch (e) {
+        next(e);  
+    }
+   
+};
+
+ambassadorController.delete = async (req, res, next)=> {
+    const ambassador_id = req.params.ambassador_id;
+    
+    try {
+        await Ambassador.deleteOne({_id: ambassador_id});
+        res.send({
+            success:true
+        })
+        
+    } catch (e) {
+        next(e);
+    }
+   };
 
 ambassadorController.login = async (req,res,next)=> {
 
@@ -88,8 +120,8 @@ ambassadorController.get = async (req, res, next) => {
 
 
 ambassadorController.profile = (req, res, next) => {
-    const { ambassador } = req;
-    res.send({ ambassador });
+    const { user } = req;
+    res.send({ user });
 }
 
 

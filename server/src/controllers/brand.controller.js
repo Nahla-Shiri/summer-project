@@ -1,4 +1,4 @@
-
+const jwt = require('jsonwebtoken');
 const Brand = require('../models/brand.model');
 
 const brandController = {}
@@ -7,6 +7,7 @@ brandController.get = async (req, res, next) => {
     
     try {
         const  brand = await Brand.find();
+        console.log(brand)
         return res.send({
             brand
         })
@@ -15,7 +16,6 @@ brandController.get = async (req, res, next) => {
         next(e);
         
     }
-  Brand.find();
 };
 
 
@@ -49,10 +49,10 @@ brandController.register =  async (req, res, next )=> {
 
 brandController.update = async (req, res, next)=> {
     const brand_id = req.params.brand_id; 
-    const { name, email, password, tel, summary, description, logo, gallery} = req.body;
+    
     try {
 
-        const updated = await Brand.update( {_id: brand_id}, { name, email, password, tel, summary, description, logo, gallery} );
+        const updated = await Brand.update( {_id: brand_id}, { $set: req.body });
         res.send({
             success: true,
             brand: updated
@@ -88,7 +88,7 @@ brandController.login = async (req,res,next)=> {
     const {email, password } =req.body;
     try {
         //Check brandname and password are ok
-        const brand = await Ambassador.findOne({email}); // eq {email: email}
+        const brand = await Brand.findOne({email}); // eq {email: email}
         if(!brand){
             const err = new Error(`l'adresse e-mail ${email} n'existe pas`);
             err.status = 401;
@@ -120,8 +120,8 @@ brandController.login = async (req,res,next)=> {
 
 
 brandController.profile = (req, res, next) => {
-    const { brand } = req;
-    res.send({ brand });
+    const { user } = req;
+    res.send({ user });
 }
 
 
