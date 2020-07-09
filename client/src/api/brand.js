@@ -13,5 +13,5 @@ export const apiDeleteBrand = brandId => {
 }
 
 export const apiFetchBrand = () => {
-    return axios.get('/brand');
+    return axios.get('/brands');
 }

@@ -10,6 +10,7 @@ const initialState = {
   isAuth: false,
   profile: {},
   error: null,
+  userType: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -17,7 +18,7 @@ export default (state = initialState, { type, payload }) => {
     case AUTH_ATTEMPTING:
       return { ...state, attempting: true, isAuth: false, error: null };
     case AUTH_SUCCESS:
-      return { ...state, attempting: false, isAuth: true, error: null };
+      return { ...state, attempting: false, isAuth: true, error: null, userType: payload };
     case AUTH_FAILED:
       return {
         ...state,

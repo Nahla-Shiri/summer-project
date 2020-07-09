@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
 import {
   Collapse,
   Navbar,
@@ -13,7 +15,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-import { useSelector, useDispatch } from "react-redux";
+
 import { logUserOut } from "../actions/auth_actions";
 import logo from "../assets/img/fastbee-logo.png";
 
@@ -46,8 +48,14 @@ const NavBar = (props) => {
     }
     return (
       <>
-        <NavLink href="/login">Espace embassadrice</NavLink>
-        <NavLink href="/login">Espace marque</NavLink>
+        <Link className="nav-link" to={{
+            pathname: '/login',
+            state: 'ambassador'
+          }}>Espace embassadrice</Link>
+        <Link className="nav-link" to={{
+            pathname: '/login',
+            state: 'brand'
+          }}>Espace marque</Link>
       </>
     );
   };

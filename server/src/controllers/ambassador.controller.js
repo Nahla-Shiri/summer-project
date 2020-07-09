@@ -70,7 +70,7 @@ ambassadorController.delete = async (req, res, next)=> {
 ambassadorController.login = async (req,res,next)=> {
 
     //ambassadorname, password in request
-    const {email, password } =req.body;
+    const {type, email, password } =req.body;
     try {
         //Check ambassadorname and password are ok
         const ambassador = await Ambassador.findOne({email}); // eq {email: email}

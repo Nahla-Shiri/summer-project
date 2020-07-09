@@ -1,26 +1,27 @@
 import { apiLogin, getProfile} from '../api/user';
 import { AUTH_ATTEMPTING, AUTH_SUCCESS, AUTH_FAILED, USER_LOGGED_OUT, PROFILE_FETCH } from './type';
 import setAuthHeader from '../api/setAuthHeader';
+import { addErrorMessage, clearErrorMessages } from './error_actions';
 const TOKEN_NAME = "brand_token";
 
-export const signIn = request_data => {
+export const signIn = (request_data)=> {
+    
    return async dispatch =>  {
        dispatch({ type:AUTH_ATTEMPTING });
         try {
-            
+            dispatch(clearErrorMessages());
             const {data: {token}} = await apiLogin(request_data);
             setAuthHeader(token);
-            dispatch(getUserProfile());
-            dispatch(success(token));
+            dispatch(getUserProfile(request_data.userType));
+            dispatch(success(token, request_data.userType));
             
         } catch (e) {
-            const {response: {data}} = e;
-            dispatch(error(data.error));
+            dispatch(addErrorMessage(e));
         }
     };
 };
 
-export const onLoadingSignIn = () => {
+export const onLoadingSignIn = (userType) => {
     return dispatch => {
         try {
             const token = localStorage.getItem(TOKEN_NAME);
@@ -28,7 +29,7 @@ export const onLoadingSignIn = () => {
                 return dispatch(error('You need to login'))
             }
             setAuthHeader(token);
-            dispatch(getUserProfile());
+            dispatch(getUserProfile(userType));
             dispatch(success(token));
             
         } catch (e) {
@@ -37,10 +38,10 @@ export const onLoadingSignIn = () => {
     }
 }
 
-export const getUserProfile = (token) => {
+export const getUserProfile = (userType) => {
     return async dispatch => {
         try {
-            const {data: {user}} = await getProfile(token);
+            const {data: {user}} = await getProfile(userType);
             dispatch({type:PROFILE_FETCH, payload: user});
             
         } catch (e) {
@@ -54,9 +55,9 @@ export const logUserOut =() => {
     return({type:USER_LOGGED_OUT})
 }
 
-const success = (token)=> {
+const success = (token, userType)=> {
     localStorage.setItem(TOKEN_NAME, token);
-    return {type:AUTH_SUCCESS};
+    return {type:AUTH_SUCCESS, payload : userType};
 }
 
 const error = (error) => {

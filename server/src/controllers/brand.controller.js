@@ -85,29 +85,33 @@ brandController.delete = async (req, res, next)=> {
 brandController.login = async (req,res,next)=> {
 
     //brandname, password in request
-    const {email, password } =req.body;
+    const {type, email, password } =req.body;
     try {
         //Check brandname and password are ok
         const brand = await Brand.findOne({email}); // eq {email: email}
-        if(!brand){
+       
+        if(!brand ){
+           
             const err = new Error(`l'adresse e-mail ${email} n'existe pas`);
             err.status = 401;
             next(err);
         }
+        else {
+            brand.isPasswordMatch(password, brand.password,(err, matched)=>{
+                if(matched) {
+                   const secret = process.env.JWT_SECRET;
+                   const expire = process.env.JWT_EXPIRATION;
+                   const token = jwt.sign({_id: brand._id}, secret, {expiresIn : expire});
+                   return res.send({token});
+                }
+    
+                res.status(401).send({
+                    
+                    error : 'l email ou le mot de passe est incorrect'
+                });
+            })
+        }
         
-        brand.isPasswordMatch(password, brand.password,(err, matched)=>{
-            if(matched) {
-               const secret = process.env.JWT_SECRET;
-               const expire = process.env.JWT_EXPIRATION;
-               const token = jwt.sign({_id: brand._id}, secret, {expiresIn : expire});
-               return res.send({token});
-            }
-
-            res.status(401).send({
-                
-                error : 'l email ou le mot de passe est incorrect'
-            });
-        })
 
 
         

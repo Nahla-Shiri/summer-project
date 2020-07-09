@@ -1,18 +1,22 @@
-import React from 'react';
-import {Route, Switch} from 'react-router-dom';
-import {Home, Login, Signup, EditBrand} from './pages';
-import { NavBar, ProtectedRoute } from './components';
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { onLoadingSignIn } from "./actions/auth_actions";
+import { NavBar, Routes } from "./components";
+import store from "./store";
+
+const {userType} =store.getState();
+store.dispatch(onLoadingSignIn(userType));
 
 function App() {
   return (
     <div>
-      <NavBar />
-      <Switch>
-         <ProtectedRoute path="/edit-brand" component={EditBrand} exact />
-      </Switch>
-      <Route path="/" component={Home} exact />
-      <Route path="/login" component={Login} exact />
-      <Route path="/signup" component={Signup} exact />
+      <BrowserRouter>
+        <Provider store={store}>
+          <NavBar />
+          <Routes />
+        </Provider>
+      </BrowserRouter>
     </div>
   );
 }
