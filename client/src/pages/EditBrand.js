@@ -13,7 +13,7 @@ const EditBrand = (props) => {
     let item ; // get item from location state
 
     try {
-        item = props.location.state.item;
+        item = props.location.state;
     } catch (e) {
         item = undefined;
     }
@@ -22,10 +22,11 @@ const EditBrand = (props) => {
     {
       history.push('/')
     }
-
+    
     const handleFormSubmit = (values, bag) => {
-        item = props.location.state.item;
+        item = props.location.state;
         values._id = item._id;
+        values.gallery = values.gallery[0].split(",");
         dispatch(updateBrand(values));
         bag.setSubmitting(false);
     }

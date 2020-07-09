@@ -42,7 +42,9 @@ export const getUserProfile = (userType) => {
     return async dispatch => {
         try {
             const {data: {user}} = await getProfile(userType);
-            dispatch({type:PROFILE_FETCH, payload: user});
+            
+             const profile = {...user, type: userType}
+            dispatch({type:PROFILE_FETCH, payload: profile});
             
         } catch (e) {
             console.error(e);

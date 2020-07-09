@@ -2,22 +2,23 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, FormGroup, FormText, Input, FormFeedback } from "reactstrap";
+import { useHistory } from "react-router";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 import { signIn } from "../actions";
 import { ErrorMessage } from "../components";
-import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {
   const dispatch = useDispatch();
   const auth= useSelector((state) => state.auth);
+  let history = useHistory()
   let userType ;
 
   if(auth.isAuth)
   {
-    console.log('here')
+    history.push("/profile")
   }
   
   
@@ -103,15 +104,7 @@ const Login = (props) => {
           )}
         </Formik>
         <FormText>vous n'avez pas encore de compte?</FormText>
-        <Link
-          to={{
-            pathname: "/login",
-            state: { userType },
-          }}
-        >
-          {" "}
-          Créer un compte
-        </Link>
+        <Link to={{ pathname: "/signup", state: { userType } }} >Créer un compte </Link>
       </div>
     </div>
   );
