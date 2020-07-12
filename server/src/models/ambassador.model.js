@@ -7,7 +7,7 @@ const AmbassadorSchema = Schema({
   name: { type: String },
   email: { type: String, required: true, index: true, unique: true },
   password: { type: String, required: true },
-  photo : { type: String, required: true },
+  photo : { type: Object, required: true },
   street : { type: String, required: true },
   cp : { type: Number, required: true },
   city : { type: String, required: true },
@@ -36,6 +36,8 @@ AmbassadorSchema.pre("save", async function (next) {
   }
 });
 
+
+
 AmbassadorSchema.methods.isPasswordMatch = function(password, hashed, callback) {
     bcrypt.compare(password, hashed, (err, success) => {
       if (err) {
@@ -46,11 +48,11 @@ AmbassadorSchema.methods.isPasswordMatch = function(password, hashed, callback) 
   };
 
 // display Ambassador info without password  
-AmbassadorSchema.methods.toJSON = function() {
+/*AmbassadorSchema.methods.toJSON = function() {
   const AmbassadorObject = this.toObject();
   delete AmbassadorObject.password;
   return AmbassadorObject;
-}
+}*/
 
 const Ambassador = mongoose.model("Ambassador", AmbassadorSchema);
 module.exports = Ambassador;

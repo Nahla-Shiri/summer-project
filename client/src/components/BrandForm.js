@@ -1,22 +1,23 @@
 import React from 'react';
+import {
+  Button,
+  FormGroup,
+  Input,
+  FormFeedback,
+} from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import {
-    Button,
-    FormGroup,
-    Input,
-    FormFeedback,
-  } from "reactstrap";
-  
+ 
 import { ErrorMessage } from "../components";
-const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
-  console.log(brand);
-   const { name = '', email='', tel=0, summary='', description ='', logo='',gallery=[]} = brand;
+
+const BrandForm = ({type="signup", btnTxt ="Enregistrer", onSubmit, brand={} }) => {
+
+   const { name = '', email='', password='',tel=0, summary='', description ='', logo=''} = brand;
     return (
-      <>
+      <div className={type}>
       <ErrorMessage />
         <Formik 
-        initialValues ={{name,email,tel,summary, description,logo,gallery}}
+        initialValues ={{name,email, password,tel,summary, description,logo}}
         onSubmit={onSubmit}
         validationSchema={Yup.object().shape({
             name: Yup.string().min(3).required(),
@@ -38,6 +39,7 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
             touched, 
           }) => (
             <div>
+
               <FormGroup>
                 <Input
                   invalid={errors.name && touched.name} // invalid if touched and has error
@@ -61,7 +63,19 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
                   onBlur={handleBlur}
                 />
                  {errors.email && touched.email && <FormFeedback>{errors.email}</FormFeedback>}
-              </FormGroup>
+              </FormGroup> 
+              <FormGroup>
+                <Input
+                  invalid={errors.password && touched.password} // invalid if touched and has error
+                  name="password"
+                  type="password"
+                  value= {values.password}
+                  placeholder="Password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                 {errors.email && touched.email && <FormFeedback>{errors.email}</FormFeedback>}
+              </FormGroup> 
               <FormGroup>
                 <Input
                   invalid={errors.tel && touched.tel} // invalid if touched and has error
@@ -113,19 +127,6 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
                 />
                  {errors.logo && touched.logo && <FormFeedback>{errors.logo}</FormFeedback>}
               </FormGroup>
-              <FormGroup>
-               
-                <Input
-                  invalid={errors.gallery && touched.gallery} // invalid if touched and has error
-                  name="gallery"
-                  type="textarea"
-                  value= {values.gallery}
-                  placeholder="Brand gallery"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                 {errors.gallery && touched.gallery && <FormFeedback>{errors.gallery}</FormFeedback>}
-              </FormGroup>
               <Button
                 color="dark"
                 block
@@ -137,7 +138,7 @@ const BrandForm = ({btnTxt ="save brand", onSubmit, brand={} }) => {
             </div>
           )}
         </Formik> 
-        </>
+        </div>
     )
 }
 

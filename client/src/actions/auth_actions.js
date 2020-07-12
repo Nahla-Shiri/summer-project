@@ -12,8 +12,8 @@ export const signIn = (request_data)=> {
             dispatch(clearErrorMessages());
             const {data: {token}} = await apiLogin(request_data);
             setAuthHeader(token);
-            dispatch(getUserProfile(request_data.userType));
-            dispatch(success(token, request_data.userType));
+            dispatch(getUserProfile());
+            dispatch(success(token));
             
         } catch (e) {
             dispatch(addErrorMessage(e));
@@ -21,7 +21,7 @@ export const signIn = (request_data)=> {
     };
 };
 
-export const onLoadingSignIn = (userType) => {
+export const onLoadingSignIn = () => {
     return dispatch => {
         try {
             const token = localStorage.getItem(TOKEN_NAME);
@@ -29,7 +29,7 @@ export const onLoadingSignIn = (userType) => {
                 return dispatch(error('You need to login'))
             }
             setAuthHeader(token);
-            dispatch(getUserProfile(userType));
+            dispatch(getUserProfile());
             dispatch(success(token));
             
         } catch (e) {
@@ -38,12 +38,12 @@ export const onLoadingSignIn = (userType) => {
     }
 }
 
-export const getUserProfile = (userType) => {
+export const getUserProfile = () => {
     return async dispatch => {
         try {
-            const {data: {user}} = await getProfile(userType);
+            const {data: {user}} = await getProfile();
             
-             const profile = {...user, type: userType}
+             const profile = {...user}
             dispatch({type:PROFILE_FETCH, payload: profile});
             
         } catch (e) {
@@ -57,9 +57,9 @@ export const logUserOut =() => {
     return({type:USER_LOGGED_OUT})
 }
 
-const success = (token, userType)=> {
+const success = (token)=> {
     localStorage.setItem(TOKEN_NAME, token);
-    return {type:AUTH_SUCCESS, payload : userType};
+    return {type:AUTH_SUCCESS};
 }
 
 const error = (error) => {

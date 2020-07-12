@@ -7,7 +7,6 @@ brandController.get = async (req, res, next) => {
     
     try {
         const  brand = await Brand.find();
-        console.log(brand)
         return res.send({
             brand
         })
@@ -20,7 +19,7 @@ brandController.get = async (req, res, next) => {
 
 
 brandController.register =  async (req, res, next )=> {
-    const { name, email, password, tel, summary, description, logo, gallery} = req.body;
+    const { name, email, password, tel, summary, description, logo} = req.body;
     const newBrand = new Brand({
         name,
         email,
@@ -28,9 +27,9 @@ brandController.register =  async (req, res, next )=> {
         tel,
         summary,
         description,
-        logo,
-        gallery
+        logo
     });
+
 
     try {
         
@@ -89,7 +88,7 @@ brandController.login = async (req,res,next)=> {
     try {
         //Check brandname and password are ok
         const brand = await Brand.findOne({email}); // eq {email: email}
-       
+       console.log(brand);
         if(!brand ){
            
             const err = new Error(`l'adresse e-mail ${email} n'existe pas`);

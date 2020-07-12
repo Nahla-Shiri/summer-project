@@ -6,7 +6,7 @@ const ambassadorController = {}
  */
 
 ambassadorController.register = async(req, res, next) => {
-   const {name, email, password, photo, street,cp,city,country,ambassador } =req.body;
+   const {name, email, password, photo, street,cp,city,country,brand } =req.body;
    const newAmbassador = new Ambassador({
     name,
     email,
@@ -16,7 +16,7 @@ ambassadorController.register = async(req, res, next) => {
     cp,
     city,
     country,
-    ambassador
+    brand
    });
 
    try {

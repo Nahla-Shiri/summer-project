@@ -20,13 +20,12 @@ const EditBrand = (props) => {
     
     if ( updated ) 
     {
-      history.push('/')
+      history.push('/brand-profile')
     }
     
     const handleFormSubmit = (values, bag) => {
         item = props.location.state;
         values._id = item._id;
-        values.gallery = values.gallery[0].split(",");
         dispatch(updateBrand(values));
         bag.setSubmitting(false);
     }
@@ -38,7 +37,7 @@ const EditBrand = (props) => {
             <h3>Edit Brand</h3>
             <hr/>
             <ErrorMessage />
-            <BrandForm  btnTxt="update" brand={item} onSubmit={handleFormSubmit}   />
+            <BrandForm  btnTxt="update" type="edit" brand={item} onSubmit={handleFormSubmit}   />
         </div>
     )
 }

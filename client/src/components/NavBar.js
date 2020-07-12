@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import {
   Collapse,
@@ -48,14 +47,8 @@ const NavBar = (props) => {
     }
     return (
       <>
-        <Link className="nav-link" to={{
-            pathname: '/login',
-            state: 'ambassador'
-          }}>Espace embassadrice</Link>
-        <Link className="nav-link" to={{
-            pathname: '/login',
-            state: 'brand'
-          }}>Espace marque</Link>
+       <NavLink href="/ambassador-login">Espace embassadrice</NavLink>
+       <NavLink href="/brand-login">Espace marque</NavLink>
       </>
     );
   };

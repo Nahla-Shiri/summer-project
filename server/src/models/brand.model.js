@@ -4,14 +4,13 @@ const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
 
 const BrandSchema = Schema({
-  name: { type: String, required: true,  index: true, unique: true },
-  email: { type: String, required: true, index: true, unique: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
   password: { type: String, required: true },
   tel : {type :Number, required: true},
   summary :{ type: String, required: true},
   description: { type: String },
-  logo :{ type: String, required: true},
-  gallery : {type: [String]},
+  logo :{ type: String, required: true}
   
 });
 
@@ -32,6 +31,8 @@ BrandSchema.pre("save", async function (next) {
   }
 });
 
+
+
 BrandSchema.methods.isPasswordMatch = function(password, hashed, callback) {
     bcrypt.compare(password, hashed, (err, success) => {
       if (err) {
@@ -42,11 +43,11 @@ BrandSchema.methods.isPasswordMatch = function(password, hashed, callback) {
   };
 
 // display user info without password  
-BrandSchema.methods.toJSON = function() {
+/*BrandSchema.methods.toJSON = function() {
   const userObject = this.toObject();
   delete userObject.password;
   return userObject;
-}
+}*/
 
 
 const Brand = mongoose.model("Brand", BrandSchema);

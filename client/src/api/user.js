@@ -1,16 +1,17 @@
 import axios from 'axios';
 
 export const apiLogin = (request_data) => {
-    if(request_data.userType ==="brand")
+    
+    if(request_data.user ==="brand")
         return axios.post('/brand-login', request_data);
     else
-    return axios.post('/ambassador-login', request_data); 
+        return axios.post('/ambassador-login', request_data); 
     
 
 }
 
-export const getProfile = (userType) => {
-    if(userType === "brand")
+export const getProfile = (user) => {
+    if(user === "brand")
         return axios.get('/brand-profile');
     else
         return   axios.get('/ambassador-profile');  

@@ -10,29 +10,20 @@ import * as Yup from "yup";
 import { signIn } from "../actions";
 import { ErrorMessage } from "../components";
 
-const Login = (props) => {
+const Login = ({user}) => {
   const dispatch = useDispatch();
   const auth= useSelector((state) => state.auth);
   let history = useHistory()
-  let userType ;
 
   if(auth.isAuth)
-  {
-    history.push("/profile")
+  { 
+    history.push(`${user}-profile/`)
   }
   
   
-
-  // get type of user login
-  try {
-    userType = props.location.state;
-  } catch (e) {
-    userType = undefined;
-  }
 
   const handleFormSubmit = (values, bag) => {
-    console.log(userType);
-    dispatch(signIn({userType, ...values}));
+    dispatch(signIn({user, ...values}));
     bag.setSubmitting(false);
   };
 
@@ -104,7 +95,7 @@ const Login = (props) => {
           )}
         </Formik>
         <FormText>vous n'avez pas encore de compte?</FormText>
-        <Link to={{ pathname: "/signup", state: { userType } }} >Créer un compte </Link>
+        <Link to={{ pathname: `${user}-signup`}} >Créer un compte </Link>
       </div>
     </div>
   );

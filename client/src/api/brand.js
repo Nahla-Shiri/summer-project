@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const apiSaveBrand = brand => {
-    return axios.post('/brand', brand);
+    return axios.post('/brand-register', brand);
 }
 
 export const apiUpdateBrand = brand => {

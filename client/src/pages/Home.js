@@ -1,7 +1,6 @@
 import React,{ useEffect } from 'react';
 import { ListGroup } from 'reactstrap';
 import { BrandItem, Slider } from '../components';
-import AddBrand from './AddBrand';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBrand} from '../actions/brand_actions';
 
@@ -41,7 +40,6 @@ const slides = [
     return (
         <div>
             <Slider slides={slides}/>
-            <AddBrand />
             <ListGroup>
             { brand  && fetching ? brand.map(item => (
             <BrandItem key={item._id} item={item}  />
