@@ -7,7 +7,7 @@ const AmbassadorSchema = Schema({
   name: { type: String },
   email: { type: String, required: true, index: true, unique: true },
   password: { type: String, required: true },
-  photo : { type: Object, required: true },
+  photo : { type: String, required: true },
   street : { type: String, required: true },
   cp : { type: Number, required: true },
   city : { type: String, required: true },

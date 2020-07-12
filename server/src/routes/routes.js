@@ -5,14 +5,13 @@ const passport = require('passport');
 const userContorller = require('../controllers/users.controller');
 const brandContorller = require('../controllers/brand.controller');
 const ambassadorContorller = require('../controllers/ambassador.controller');
-//Auth and sign Up
+
 router.post('/ambassador-register', ambassadorContorller.register);
 router.post('/ambassador-login', ambassadorContorller.login);
 router.post( '/brand-register', brandContorller.register);
 router.post( '/brand-login', brandContorller.login);
 router.get( '/brands', brandContorller.get);
 router.get( '/ambassadors', ambassadorContorller.get);
-
 
 //Customize and Protect the routes
 let protected =['/brand-profile', '/brand/:brand_id','/ambassador-profile'] ;

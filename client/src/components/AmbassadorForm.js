@@ -14,7 +14,6 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
   useEffect(() => {
    dispatch(fetchBrand());
   }, [])
-
   
   const brandState= useSelector(state => state.brand);
   const {
@@ -56,7 +55,12 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
           street: Yup.string().min(1).required(),
           city: Yup.string().min(1).required(),
           country: Yup.string().min(1).required(),
-          photo: Yup.mixed().required(),
+          photo: Yup.mixed().when('type', (type, schema) => {
+            if (type === 'signup') { return schema.required(); }
+            return schema;
+          }),
+
+
         })}
       >
         {({
@@ -207,7 +211,7 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
                   <input id="photo" name="photo" type="file" onChange={(event) => {
                     setFieldValue("photo", event.currentTarget.files[0]);
                   }} className="propsm-control" />
-                {  console.log(values.photo)}
+                
                 <Thumb file={values.photo} />
              </FormGroup>
             <Button

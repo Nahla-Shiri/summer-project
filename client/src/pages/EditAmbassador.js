@@ -2,14 +2,17 @@ import React from 'react';
 import { useDispatch, useSelector, } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+
 import { AmbassadorForm, ErrorMessage } from '../components';
 import { updateAmbassador } from '../actions/ambassador_actions';
+
 
 const EditAmbassador = (props) => {
     
     const history = useHistory();
     const dispatch = useDispatch();
     const updated = useSelector(state => state.ambassador.updated);
+    const photo = useSelector(state=>state.upload.file);
     let item ; // get item from location state
 
     try {
@@ -19,23 +22,17 @@ const EditAmbassador = (props) => {
     }
     
     if ( updated ) 
-    {
+    { 
       history.push('/ambassador-profile')
     }
     
     const handleFormSubmit = (values, bag) => {
         item = props.location.state;
         values._id = item._id;
-        values.photo =
-            JSON.stringify(
-              { 
-                fileName: values.photo.name, 
-                type: values.photo.type,
-               
-              }
-              );
-        console.log(values);
+        if(photo) values.photo = photo;
+        
         dispatch(updateAmbassador(values));
+        
         bag.setSubmitting(false);
     }
 

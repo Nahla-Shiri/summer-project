@@ -1,5 +1,5 @@
 import { AMBASSADOR_SAVED, FETCHING_AMBASSADOR, FETCHED_SUCCESS, FETCHED_FAILED, AMBASSADOR_UPDATED} from './type';
-import {apiSaveAmbassador, apiFetchAmbassador, apiUpdateAmbassador, apiDeleteAmbassador} from '../api/ambassador'
+import {apiSaveAmbassador, apiFetchAmbassador, apiUpdateAmbassador, apiDeleteAmbassador} from '../api/ambassador';
 import { addErrorMessage, clearErrorMessages } from './error_actions';
 export const saveAmbassador = ambassador => {
     return async dispatch => {

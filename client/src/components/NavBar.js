@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import {
   Collapse,
@@ -40,6 +41,7 @@ const NavBar = (props) => {
           <DropdownToggle color="link" caret>Bienvenue {auth.profile.name}</DropdownToggle>
           <DropdownMenu>
             <DropdownItem onClick={handleLogOut}>Logout</DropdownItem>
+            <DropdownItem tag={Link} to={auth.profile.photo ? "/ambassador-profile" : "brand-profile"}>Profile</DropdownItem>
           </DropdownMenu>
         </ButtonDropdown>
         </>

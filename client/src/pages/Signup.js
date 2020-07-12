@@ -11,12 +11,14 @@ const Signup = ({ user }) => {
   const dispatch = useDispatch();
   const brand_saved = useSelector((state) => state.brand.saved);
   const ambassador_saved = useSelector((state) => state.ambassador.saved);
+  const photo = useSelector(state=>state.upload.file);
   if (user === "brand") {
     if (brand_saved) {
       history.push("brand-login");
     }
 
     const handleBrandFormSubmit = (values, bag) => {
+      if(photo) values.photo = photo;
       dispatch(saveBrand(values));
       bag.setSubmitting(false);
     };
@@ -34,6 +36,7 @@ const Signup = ({ user }) => {
   }
 
   const handleAmbassadorFormSubmit = (values, bag) => {
+    if(photo) values.photo = photo;
     dispatch(saveAmbassador(values));
     bag.setSubmitting(false);
   };

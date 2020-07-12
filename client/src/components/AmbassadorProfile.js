@@ -1,25 +1,31 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 
 import { Button } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { deleteAmbassador } from "../actions/ambassador_actions";
+import {getUserProfile} from "../actions/auth_actions";
 
 const AmbassadorProfile = () => {
 
     
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+   }, [])
+  
     const onDelete = (e) => {
         dispatch(deleteAmbassador(profile._id));
       };
     return (
         <div className="brandProfile">
         <div className="profileHeader">
-          <Link className="brandLogo">
+          <div className="brandLogo">
             <img src={profile.photo} alt={profile.name} />
-          </Link>
+          </div>
           <div className="float-right">
             <Link
               to={{
