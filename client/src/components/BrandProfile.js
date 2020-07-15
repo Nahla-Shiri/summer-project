@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import { Button } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { deleteBrand } from "../actions/brand_actions";
+import {getUserProfile} from "../actions/auth_actions";
 
 const BrandProfile = () => {
 
     
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+   }, [])
+  
     const onDelete = (e) => {
         dispatch(deleteBrand(profile._id));
       };

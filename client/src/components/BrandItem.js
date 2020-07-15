@@ -10,7 +10,7 @@ const BrandItem = ({ item }) => {
           <CardBody>
             <CardTitle>{item.name}</CardTitle>
             <CardText>{item.summary}</CardText>
-            <Link to="/">+</Link>
+            <Link to="/" className="more">+</Link>
           </CardBody>
         </Card>
      

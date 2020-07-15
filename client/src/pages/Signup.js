@@ -11,14 +11,15 @@ const Signup = ({ user }) => {
   const dispatch = useDispatch();
   const brand_saved = useSelector((state) => state.brand.saved);
   const ambassador_saved = useSelector((state) => state.ambassador.saved);
-  const photo = useSelector(state=>state.upload.file);
+  const upload = useSelector(state=>state.upload.file);
   if (user === "brand") {
+    
     if (brand_saved) {
       history.push("brand-login");
     }
 
     const handleBrandFormSubmit = (values, bag) => {
-      if(photo) values.photo = photo;
+      if(upload) values.logo = upload;
       dispatch(saveBrand(values));
       bag.setSubmitting(false);
     };
@@ -31,12 +32,14 @@ const Signup = ({ user }) => {
       </div>
     );
   }
+
+ 
   if (ambassador_saved) {
     history.push("ambassador-login");
   }
 
   const handleAmbassadorFormSubmit = (values, bag) => {
-    if(photo) values.photo = photo;
+    if(upload) values.photo = upload;
     dispatch(saveAmbassador(values));
     bag.setSubmitting(false);
   };

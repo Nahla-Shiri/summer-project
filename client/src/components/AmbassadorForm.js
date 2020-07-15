@@ -1,21 +1,24 @@
-import React, { useEffect }  from "react";
+import React, { useEffect } from "react";
 import { Button, FormGroup, Input, FormFeedback } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 import { ErrorMessage, Thumb } from "../components";
-import { fetchBrand } from '../actions/brand_actions'
+import { fetchBrand } from "../actions/brand_actions";
 
-const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, ambassador = {},
+const AmbassadorForm = ({
+  type = "signup",
+  btnTxt = "Enregistrer",
+  onSubmit,
+  ambassador = {},
 }) => {
-
   const dispatch = useDispatch();
   useEffect(() => {
-   dispatch(fetchBrand());
-  }, [])
-  
-  const brandState= useSelector(state => state.brand);
+    dispatch(fetchBrand());
+  }, []);
+
+  const brandState = useSelector((state) => state.brand);
   const {
     name = "",
     email = "",
@@ -25,11 +28,9 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
     street = "",
     city = "",
     country = "",
-    brand ="",
- 
+    brand = "",
   } = ambassador;
 
- 
   return (
     <div className={type}>
       <ErrorMessage />
@@ -43,10 +44,9 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
           cp,
           city,
           country,
-          brand
+          brand,
         }}
         onSubmit={onSubmit}
-        
         validationSchema={Yup.object().shape({
           name: Yup.string().min(3).required(),
           email: Yup.string().email().required(),
@@ -55,12 +55,12 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
           street: Yup.string().min(1).required(),
           city: Yup.string().min(1).required(),
           country: Yup.string().min(1).required(),
-          photo: Yup.mixed().when('type', (type, schema) => {
-            if (type === 'signup') { return schema.required(); }
+          photo: Yup.mixed().when("type", (type, schema) => {
+            if (type === "signup") {
+              return schema.required();
+            }
             return schema;
           }),
-
-
         })}
       >
         {({
@@ -103,7 +103,7 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
                 <FormFeedback>{errors.email}</FormFeedback>
               )}
             </FormGroup>
-       
+
             <FormGroup>
               <Input
                 invalid={errors.password && touched.password} // invalid if touched and has error
@@ -189,31 +189,37 @@ const AmbassadorForm = ({ type = "signup", btnTxt = "Enregistrer", onSubmit, amb
                 <FormFeedback>{errors.country}</FormFeedback>
               )}
             </FormGroup>
-           
+
             <FormGroup>
-            <select
+              <select
                 name="brand"
                 value={values.brand}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                 { brandState.brand  && brandState.fetching ? brandState.brand.map(item => (
-             <option key={item._id} value={item._id} label={item.name} />
-            )) :  <option>loading ...</option>  }
-             
-               
+                {brandState.brand && brandState.fetching ? (
+                  brandState.brand.map((item) => (
+                    <option key={item._id} value={item._id} label={item.name} />
+                  ))
+                ) : (
+                  <option>loading ...</option>
+                )}
               </select>
             </FormGroup>
-
-
             <FormGroup>
-                  <label props="photo">Photo de profile</label>
-                  <input id="photo" name="photo" type="file" onChange={(event) => {
-                    setFieldValue("photo", event.currentTarget.files[0]);
-                  }} className="propsm-control" />
-                
-                <Thumb file={values.photo} />
-             </FormGroup>
+              <label props="photo">Photo de profile</label>
+              <input
+                id="photo"
+                name="photo"
+                type="file"
+                onChange={(event) => {
+                  setFieldValue("photo", event.currentTarget.files[0]);
+                }}
+                className="propsm-control"
+              />
+
+              <Thumb file={values.photo} />
+            </FormGroup>
             <Button
               color="dark"
               block

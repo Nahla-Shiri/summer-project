@@ -10,6 +10,7 @@ const EditBrand = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const updated = useSelector(state => state.brand.updated);
+    const logo = useSelector(state=>state.upload.file);
     let item ; // get item from location state
 
     try {
@@ -26,6 +27,7 @@ const EditBrand = (props) => {
     const handleFormSubmit = (values, bag) => {
         item = props.location.state;
         values._id = item._id;
+        if(logo) values.logo = logo;
         dispatch(updateBrand(values));
         bag.setSubmitting(false);
     }
