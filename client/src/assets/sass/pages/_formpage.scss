@@ -1,0 +1,59 @@
+.formContainer {
+    @include flexbox;
+    box-shadow: 5px 10px 15px #999;
+
+    .formImg, .formContent {
+        width: 50%;
+    }
+
+    .formContent {
+        padding: 50px;
+        h1 {
+            font-family: $font-semibold;
+            font-size: 25px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+            margin-bottom: 50px;
+        }
+
+        button {
+            margin-top: 50px;
+        }
+
+        .signupLink {
+            color:#000;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: $font-bold;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 18px;
+            border-bottom: 1px solid #000;
+            &:hover {
+                text-decoration: none;
+                color: #666;
+            }
+        }
+
+        label {
+            padding-right: 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        select {
+            display: block;
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .edit {
+            .password {
+                display: none;
+            }
+        }
+    }
+}

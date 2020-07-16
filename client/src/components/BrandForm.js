@@ -35,6 +35,7 @@ const BrandForm = ({
         validationSchema={Yup.object().shape({
           name: Yup.string().min(3).required(),
           email: Yup.string().email().required(),
+          password: Yup.string().min(4).required(),
           tel: Yup.number().required(),
           summary: Yup.string().min(1).required(),
           description: Yup.string().min(1).required(),
@@ -59,6 +60,7 @@ const BrandForm = ({
         }) => (
           <div>
             <FormGroup>
+              <label htmlFor="titre">Titre</label>
               <Input
                 invalid={errors.name && touched.name} // invalid if touched and has error
                 name="name"
@@ -73,6 +75,7 @@ const BrandForm = ({
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="email">Email</label>
               <Input
                 invalid={errors.email && touched.email} // invalid if touched and has error
                 name="email"
@@ -86,21 +89,23 @@ const BrandForm = ({
                 <FormFeedback>{errors.email}</FormFeedback>
               )}
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="password">
+              <label htmlFor="Password">Mot de passe</label>
               <Input
                 invalid={errors.password && touched.password} // invalid if touched and has error
                 name="password"
                 type="password"
                 value={values.password}
-                placeholder="Password"
+                placeholder="Mot de passe"
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.email && touched.email && (
-                <FormFeedback>{errors.email}</FormFeedback>
+              {errors.password && touched.password && (
+                <FormFeedback>{errors.password}</FormFeedback>
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="tel">Téléphone</label>
               <Input
                 invalid={errors.tel && touched.tel} // invalid if touched and has error
                 name="tel"
@@ -115,6 +120,7 @@ const BrandForm = ({
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="summary">Introduction</label>
               <Input
                 invalid={errors.summary && touched.summary} // invalid if touched and has error
                 name="summary"
@@ -130,6 +136,7 @@ const BrandForm = ({
             </FormGroup>
 
             <FormGroup>
+              <label htmlFor="desc">Description</label>
               <Input
                 invalid={errors.description && touched.description}
                 name="description"

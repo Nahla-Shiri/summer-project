@@ -50,11 +50,12 @@ const AmbassadorForm = ({
         validationSchema={Yup.object().shape({
           name: Yup.string().min(3).required(),
           email: Yup.string().email().required(),
+          password: Yup.string().min(4).required(),
           tel: Yup.number().required(),
           cp: Yup.number().required(),
-          street: Yup.string().min(1).required(),
-          city: Yup.string().min(1).required(),
-          country: Yup.string().min(1).required(),
+          street: Yup.string().required(),
+          city: Yup.string().required(),
+          country: Yup.string().required(),
           photo: Yup.mixed().when("type", (type, schema) => {
             if (type === "signup") {
               return schema.required();
@@ -76,6 +77,7 @@ const AmbassadorForm = ({
         }) => (
           <div>
             <FormGroup>
+              <label htmlFor="name">Nom / Prénom</label>
               <Input
                 invalid={errors.name && touched.name} // invalid if touched and has error
                 name="name"
@@ -90,6 +92,7 @@ const AmbassadorForm = ({
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="email">Email</label>
               <Input
                 invalid={errors.email && touched.email} // invalid if touched and has error
                 name="email"
@@ -104,7 +107,8 @@ const AmbassadorForm = ({
               )}
             </FormGroup>
 
-            <FormGroup>
+            <FormGroup className="passowrd">
+              <label htmlFor="password">Mot de passe</label>
               <Input
                 invalid={errors.password && touched.password} // invalid if touched and has error
                 name="password"
@@ -114,11 +118,12 @@ const AmbassadorForm = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.email && touched.email && (
-                <FormFeedback>{errors.email}</FormFeedback>
+              {errors.password && touched.password && (
+                <FormFeedback>{errors.password}</FormFeedback>
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="tel">Téléphone</label>
               <Input
                 invalid={errors.tel && touched.tel} // invalid if touched and has error
                 name="tel"
@@ -134,6 +139,7 @@ const AmbassadorForm = ({
             </FormGroup>
 
             <FormGroup>
+              <label htmlFor="address">Adresse</label>
               <Input
                 invalid={errors.street && touched.street} // invalid if touched and has error
                 name="street"
@@ -148,6 +154,7 @@ const AmbassadorForm = ({
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="ville">Ville</label>
               <Input
                 invalid={errors.city && touched.city} // invalid if touched and has error
                 name="city"
@@ -162,6 +169,7 @@ const AmbassadorForm = ({
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="cp">Code postal</label>
               <Input
                 invalid={errors.cp && touched.cp} // invalid if touched and has error
                 name="cp"
@@ -176,6 +184,7 @@ const AmbassadorForm = ({
               )}
             </FormGroup>
             <FormGroup>
+              <label htmlFor="country">Country</label>
               <Input
                 invalid={errors.country && touched.country} // invalid if touched and has error
                 name="country"
@@ -191,6 +200,7 @@ const AmbassadorForm = ({
             </FormGroup>
 
             <FormGroup>
+              <label htmlFor="brand">Marque</label>
               <select
                 name="brand"
                 value={values.brand}

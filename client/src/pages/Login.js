@@ -9,6 +9,8 @@ import * as Yup from "yup";
 
 import { signIn } from "../actions";
 import { ErrorMessage } from "../components";
+import brandImg from "../assets/img/stil-D4jRahaUaIc-unsplash.jpg";
+import ambassadorImg from "../assets/img/michael-dam-mEZ3PoFGs_k-unsplash.jpg";
 
 const Login = ({user}) => {
   const dispatch = useDispatch();
@@ -30,10 +32,10 @@ const Login = ({user}) => {
   return (
     <div className="formContainer">
       <div className="formImg">
-
+          { user ==="brand" ? <img src={brandImg} alt ="brandlogin"/> : <img src={ambassadorImg} alt ="ambassadorlogin"/> }
       </div>
       <div className="formContent">
-        <h1>Log In</h1>
+        <h1>Login</h1>
         <ErrorMessage />
 
         <Formik
@@ -56,7 +58,7 @@ const Login = ({user}) => {
           }) => (
             <div>
               <FormGroup>
-               
+               <label htmlFor="email">Email</label>
                 <Input
                   invalid={errors.email && touched.email} // invalid if touched and has error
                   name="email"
@@ -71,6 +73,7 @@ const Login = ({user}) => {
                 )}
               </FormGroup>
               <FormGroup>
+                <label htmlFor="password">Mot de passe</label>
                 <Input
                   invalid={errors.password && touched.password}
                   name="password"
@@ -84,7 +87,7 @@ const Login = ({user}) => {
                 )}
               </FormGroup>
               <Button
-                color="primary"
+                color="dark" 
                 block
                 onClick={handleSubmit}
                 disabled={!isValid || isSubmitting} // disabled if isValid false or form is submitted
@@ -95,7 +98,7 @@ const Login = ({user}) => {
           )}
         </Formik>
         <FormText>vous n'avez pas encore de compte?</FormText>
-        <Link to={{ pathname: `${user}-signup`}} >Créer un compte </Link>
+        <Link to={{ pathname: `${user}-signup`}}  className="signupLink">Créer un compte </Link>
       </div>
     </div>
   );

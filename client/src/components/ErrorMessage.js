@@ -7,7 +7,7 @@ const ErrorMessageComponent = ({ message }) => {
     return <Alert color='danger'>{message}</Alert>;
   }
 
-  return <div></div>;
+  return <></>;
 };
 
 const mapStateToProps = ({ errors }) => {

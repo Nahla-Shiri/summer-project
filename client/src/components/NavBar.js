@@ -38,7 +38,7 @@ const NavBar = (props) => {
         <>
         <NavLink href="/">Aide</NavLink>
         <ButtonDropdown isOpen={dropdownOpen} toggle={toggleButton} >
-          <DropdownToggle color="link" caret>Bienvenue {auth.profile.name}</DropdownToggle>
+          <DropdownToggle color="link" caret><i className="icon-user"></i>Bienvenue {auth.profile.name}</DropdownToggle>
           <DropdownMenu>
             <DropdownItem onClick={handleLogOut}>Logout</DropdownItem>
             <DropdownItem tag={Link} to={auth.profile.photo ? "/ambassador-profile" : "brand-profile"}>Profile</DropdownItem>
