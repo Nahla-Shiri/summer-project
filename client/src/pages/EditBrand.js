@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 import { BrandForm, ErrorMessage } from '../components';
 import { updateBrand } from '../actions/brand_actions';
-import brandImg from "../assets/img/stil-D4jRahaUaIc-unsplash.jpg";
 
 const EditBrand = (props) => {
     
@@ -36,14 +35,12 @@ const EditBrand = (props) => {
     
     return (
         <div className="formContainer">
-        <div className="formImg">
-           <img src={brandImg} alt ="brand signup"/>
-        </div>
-        <div className="formContent">
-            <h1>Modifiez votre profile</h1>
-            <ErrorMessage />
-            <BrandForm  btnTxt="Modifier" type="edit" brand={item} onSubmit={handleFormSubmit}   />
-        </div>
+            <div className="formContent m-auto">
+                <img src={item.logo} alt ="brand logo" className="logoImg" />
+                <h1 className="center">Modifiez votre profile</h1>
+                <ErrorMessage />
+                <BrandForm  btnTxt="Modifier" type="edit" brand={item} onSubmit={handleFormSubmit}   />
+            </div>
         </div>
     )
 }

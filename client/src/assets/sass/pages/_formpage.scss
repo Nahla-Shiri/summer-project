@@ -34,6 +34,21 @@
                 text-decoration: none;
                 color: #666;
             }
+        } 
+
+        .profileImg {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border-radius: 200px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .logoImg {
+            width: 200px;
+            margin: 20px auto;
+            display: block;
         }
 
         label {
@@ -51,7 +66,7 @@
         }
 
         .edit {
-            .password {
+            #password {
                 display: none;
             }
         }

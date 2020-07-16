@@ -23,8 +23,8 @@ const AmbassadorForm = ({
     name = "",
     email = "",
     password = "",
-    tel = 0,
-    cp = 0,
+    tel = "",
+    cp = "",
     street = "",
     city = "",
     country = "",
@@ -107,7 +107,7 @@ const AmbassadorForm = ({
               )}
             </FormGroup>
 
-            <FormGroup className="passowrd">
+            <FormGroup id="passowrd">
               <label htmlFor="password">Mot de passe</label>
               <Input
                 invalid={errors.password && touched.password} // invalid if touched and has error

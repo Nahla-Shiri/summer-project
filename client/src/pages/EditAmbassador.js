@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 import { AmbassadorForm, ErrorMessage } from '../components';
 import { updateAmbassador } from '../actions/ambassador_actions';
-import ambassadorImg from "../assets/img/michael-dam-mEZ3PoFGs_k-unsplash.jpg";
 
 
 const EditAmbassador = (props) => {
@@ -40,11 +39,9 @@ const EditAmbassador = (props) => {
     return (
         
         <div className="formContainer">
-        <div className="formImg">
-        <img src={ambassadorImg} alt ="ambassador update"/>
-        </div>
-        <div className="formContent">
-            <h1>Modifiez votre profile</h1>
+         <div className="formContent m-auto">
+        <img src={item.photo} alt ="brand logo" className="profileImg" />
+            <h1 className="center">Modifiez votre profile</h1>
             <ErrorMessage />
             <AmbassadorForm  btnTxt="Modifier" type="edit" ambassador={item} onSubmit={handleFormSubmit}   />
         </div>

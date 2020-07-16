@@ -89,7 +89,7 @@ const BrandForm = ({
                 <FormFeedback>{errors.email}</FormFeedback>
               )}
             </FormGroup>
-            <FormGroup className="password">
+            <FormGroup id="password">
               <label htmlFor="Password">Mot de passe</label>
               <Input
                 invalid={errors.password && touched.password} // invalid if touched and has error
