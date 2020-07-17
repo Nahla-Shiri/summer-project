@@ -6,10 +6,11 @@ const ambassadorController = {}
  */
 
 ambassadorController.register = async(req, res, next) => {
-   const {name, email, password, photo, street,cp,city,country,brand } =req.body;
+   const {name, email, tel, password, photo, street,cp,city,country,brand } =req.body;
    const newAmbassador = new Ambassador({
     name,
     email,
+    tel,
     password,
     photo,
     street,

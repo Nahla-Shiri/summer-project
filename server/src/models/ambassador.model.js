@@ -6,6 +6,7 @@ const { Schema } = mongoose;
 const AmbassadorSchema = Schema({
   name: { type: String },
   email: { type: String, required: true, index: true, unique: true },
+  tel : { type :Number, required: true},
   password: { type: String, required: true },
   photo : { type: String, required: true },
   street : { type: String, required: true },
