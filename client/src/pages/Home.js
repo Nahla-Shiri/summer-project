@@ -6,6 +6,7 @@ import { fetchBrand} from '../actions/brand_actions';
 
 import slide1 from "../assets/img/paper-bags-near-wall-749353.jpg";
 import slide2 from "../assets/img/woman-wearing-maroon-velvet-plunge-neck-long-sleeved-dress-972995.jpg";
+import { Ambassadors } from './';
 
 
 
@@ -40,6 +41,7 @@ const slides = [
     return (
         <div>
             <Slider slides={slides}/>
+           
             <ListGroup>
             { brand  && fetching ? brand.map(item => (
             <BrandItem key={item._id} item={item}  />

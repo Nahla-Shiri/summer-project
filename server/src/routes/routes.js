@@ -8,8 +8,11 @@ const ambassadorContorller = require('../controllers/ambassador.controller');
 
 router.post('/ambassador-register', ambassadorContorller.register);
 router.post('/ambassador-login', ambassadorContorller.login);
+
 router.post( '/brand-register', brandContorller.register);
 router.post( '/brand-login', brandContorller.login);
+router.post( '/brand', brandContorller.getById);
+
 router.get( '/brands', brandContorller.get);
 router.get( '/ambassadors', ambassadorContorller.get);
 

@@ -1,5 +1,5 @@
-import { BRAND_SAVED, FETCHING_BRAND, FETCHED_SUCCESS, FETCHED_FAILED, BRAND_UPDATED} from './type';
-import {apiSaveBrand, apiFetchBrand, apiUpdateBrand, apiDeleteBrand} from '../api/brand'
+import { BRAND_SAVED, FETCHING_BRAND, GET_BRAND, FETCHED_SUCCESS, FETCHED_FAILED, BRAND_UPDATED} from './type';
+import {apiSaveBrand, apiFetchBrand, apiUpdateBrand, apiDeleteBrand, apiGetBrandById} from '../api/brand'
 import { addErrorMessage, clearErrorMessages } from './error_actions';
 export const saveBrand = brand => {
     return async dispatch => {
@@ -13,6 +13,10 @@ export const saveBrand = brand => {
         }
     }
 }
+
+
+
+
 
 export const updateBrand = brand => {
     return async dispatch => {
@@ -56,3 +60,16 @@ export const fetchBrand = () => {
         }
     }
 }
+
+/*export const getBrandById = (brandId) => {
+    return async dispatch => {
+        try {
+            const {data : {brand}} = await  apiGetBrandById(brandId);
+            const brandinfo = {...brand}
+            dispatch({type:GET_BRAND, payload : brandinfo});
+            
+        } catch (e) {
+            console.error(e);
+        }
+    }
+}*/

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ListGroupItem, Card, CardImg, CardText, CardBody,CardTitle, } from 'reactstrap';
+import { ListGroupItem, Card, CardImg, CardText, CardBody,CardTitle } from 'reactstrap';
 
 const BrandItem = ({ item }) => {
   return (

@@ -18,7 +18,8 @@
     .profileAction {
         position: absolute;
         bottom: 0;
-         right: 50px;
+        right: 50px;
+        z-index:999;
 
          .btn {
              margin-left: 20px;
@@ -70,27 +71,39 @@
             margin-right: 50px;
             line-height: 1.5;
 
+            img {
+                margin-left: 20px;
+            }
+
             .summary {
                 font-family: $font-semibold;
                 margin-bottom: 20px;
             }
         }
 
-        .social {
-            a {
-                color: #666;
-                font-size: 25px;
-                &:hover {
-                    color: #000;
-                }
-            }
-        }
-
-        .rating {
-            color: yellow;
-            display: inline-block
-        }
+       
 
         
+
+        
+    }
+}
+
+.rating {
+    color: yellow;
+    display: inline-block;
+
+    i {
+        font-size: 15px;
+    }
+}
+
+.social {
+    a {
+        color: #666;
+        font-size: 25px;
+        &:hover {
+            color: #000;
+        }
     }
 }

@@ -18,6 +18,22 @@ brandController.get = async (req, res, next) => {
 };
 
 
+brandController.getById = async (req, res, next) => {
+    const {id} = req.body
+    try {
+        const  brand = await Brand.findById(id);
+        console.log(brand)
+        return res.send({
+            brand
+        })
+
+    } catch (e) {
+        next(e);
+        
+    }
+};
+
+
 brandController.register =  async (req, res, next )=> {
     const { name, email, password, tel, summary, description, logo} = req.body;
     const newBrand = new Brand({

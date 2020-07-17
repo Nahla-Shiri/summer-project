@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import {Slider } from '../components';
 import { deleteBrand } from "../actions/brand_actions";
-import {getUserProfile} from "../actions/auth_actions";
+import {getUserProfile, logUserOut} from "../actions/auth_actions";
 
 import slide1 from "../assets/img/ella-jardim-M0zs81FNm6s-unsplash.jpg";
 import slide2 from "../assets/img/andrew-ridley-jR4Zf-riEjI-unsplash.jpg";
@@ -22,6 +22,8 @@ const BrandProfile = () => {
   
     const onDelete = (e) => {
         dispatch(deleteBrand(profile._id));
+        dispatch(logUserOut());
+
       };
 
       

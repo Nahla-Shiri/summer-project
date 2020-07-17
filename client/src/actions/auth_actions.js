@@ -2,6 +2,7 @@ import { apiLogin, getProfile} from '../api/user';
 import { AUTH_ATTEMPTING, AUTH_SUCCESS, AUTH_FAILED, USER_LOGGED_OUT, PROFILE_FETCH } from './type';
 import setAuthHeader from '../api/setAuthHeader';
 import { addErrorMessage, clearErrorMessages } from './error_actions';
+import { getBrandById } from './brand_actions';
 const TOKEN_NAME = "brand_token";
 
 export const signIn = (request_data)=> {
@@ -44,6 +45,7 @@ export const getUserProfile = () => {
             const {data: {user}} = await getProfile();
             
              const profile = {...user}
+           
             dispatch({type:PROFILE_FETCH, payload: profile});
             
         } catch (e) {

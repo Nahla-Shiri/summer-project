@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from 'react-router-dom';
-import {Home, Login, Signup, EditBrand, EditAmbassador, Profile} from '../pages';
+import {Home, Login, Signup, EditBrand, EditAmbassador, Profile, Ambassadors} from '../pages';
 import {ProtectedRoute } from '../components';
 
 const Routes = () => {
@@ -13,6 +13,7 @@ const Routes = () => {
         <ProtectedRoute path="/ambassador-profile/" component={Profile}  data={{user:"ambassador"}}/>
       </Switch>
       <Route path="/" component={Home} exact />
+      <Route path="/ambassadors" component={Ambassadors} exact />
 
       <Route path="/brand-login" render={(props) => <Login {...props} user="brand" />}/>
       <Route path="/ambassador-login" render={(props) => <Login {...props} user="ambassador" />}/>

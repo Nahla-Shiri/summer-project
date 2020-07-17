@@ -4,23 +4,26 @@ import {
   FETCHED_FAILED,
   FETCHED_SUCCESS,
   FETCHING_BRAND,
+  GET_BRAND
 } from "../actions/type";
 
 const initialState = {
   saved: false,
-  updated:false,
+  updated: false,
   fetching: false,
-  brand: []
+  brand: [],
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case BRAND_SAVED:
       return { ...state, saved: true };
-      case BRAND_UPDATED:
-        return { ...state, updated: true };  
+    case BRAND_UPDATED:
+      return { ...state, updated: true };
     case FETCHING_BRAND:
       return { ...state, fetching: true };
+      case GET_BRAND:
+        return { ...state, fetching: true, brand: payload  };  
     case FETCHED_SUCCESS:
       return { ...state, fetching: true, brand: payload };
     case FETCHED_FAILED:
